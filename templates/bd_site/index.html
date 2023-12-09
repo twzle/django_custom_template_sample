@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет</title>
+</head>
+<body>
+<p>Укажите нижнюю границу возраста:</p>
+    <input type="number" id="age_input" value="{{ predicate_age }}" onchange="updateAge()">
+    <hr>
+    <table>
+    <tr>
+        <td>Имя</td>
+        <td>Возраст</td>
+        <td>Дата регистрации</td>
+    </tr>
+
+    {% for person in persons %}
+        <tr>
+            {% if person.age > predicate_age %}
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.date}}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+</body>
+<script>
+    function updateAge(){
+        var v = document.getElementById("age_input").value
+        console.log(v)
+        window.location = "http://localhost:8000/custom/?age="+ v
+    }
+</script>
+
+<style>
+    td {
+        padding: .5rem;
+        border-right: solid #000;
+        border-width: 1px;
+    }
+    tr {
+        padding: .5rem;
+        border: solid #000;
+        border-width: 1px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+</style>
+
+</html>
